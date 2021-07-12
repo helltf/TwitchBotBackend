@@ -1,9 +1,7 @@
 package com.helltf.TBBackend.Entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Types;
 
 @Entity
 @Table(name = "CHANNELS")
@@ -16,19 +14,19 @@ public class Channel {
     public String name;
 
     @Column(name = "ALLOWED")
-    public int allowed;
+    public byte allowed;
 
     @Column(name = "TIMES_CONNECTED")
     public int timesConnected;
 
     @Column(name = "CURR_CONNECTED")
-    public int currConnected;
+    public byte currConnected;
 
     @Column(name = "FIRST_CONNECTED")
-    public int firstConnected;
+    public Long firstConnected;
 
     @Column(name = "ALLOWED_LIVE")
-    public int allowedLive;
+    public byte allowedLive;
 
     public int getId() {
         return id;
@@ -50,7 +48,7 @@ public class Channel {
         return allowed;
     }
 
-    public void setAllowed(int allowed) {
+    public void setAllowed(byte allowed) {
         this.allowed = allowed;
     }
 
@@ -66,15 +64,15 @@ public class Channel {
         return currConnected;
     }
 
-    public void setCurrConnected(int currConnected) {
+    public void setCurrConnected(byte currConnected) {
         this.currConnected = currConnected;
     }
 
-    public int getFirstConnected() {
+    public Long getFirstConnected() {
         return firstConnected;
     }
 
-    public void setFirstConnected(int firstConnected) {
+    public void setFirstConnected(Long firstConnected) {
         this.firstConnected = firstConnected;
     }
 
@@ -82,7 +80,7 @@ public class Channel {
         return allowedLive;
     }
 
-    public void setAllowedLive(int allowedLive) {
+    public void setAllowedLive(byte allowedLive) {
         this.allowedLive = allowedLive;
     }
 }
