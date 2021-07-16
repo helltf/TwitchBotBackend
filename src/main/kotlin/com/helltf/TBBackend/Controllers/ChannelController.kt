@@ -2,7 +2,6 @@ package com.helltf.TBBackend.Controllers
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.node.ObjectNode
 import com.helltf.TBBackend.Entities.Channel
 import com.helltf.TBBackend.Repositories.ChannelRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v1/")
-class ChannelController {
+class ChannelController: Controller() {
 
     @Autowired
     lateinit var channelRepository: ChannelRepository
@@ -31,13 +30,13 @@ class ChannelController {
     }
 
     private fun prepareResult(channelList: JsonNode): JsonNode {
-
-        return removeID(channelList);
+        return removeAllUnusedChannels(removeID(channelList));
     }
 
-    private fun removeID(channelList: JsonNode) : JsonNode{
-        channelList.map { channel -> (channel as ObjectNode).remove("id")}
-        channelList.removeAll { channel -> channel.get("currConnected").asInt() == 0  }
-        return channelList
+    private fun removeAllUnusedChannels(jsonList: JsonNode):JsonNode{
+        jsonList.removeAll { channel -> channel.get("currConnected").asInt() == 0  }
+        return jsonList
     }
+
+
 }
