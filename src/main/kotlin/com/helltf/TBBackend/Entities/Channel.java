@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Types;
 
 @Entity
-@Table(name = "CHANNELS")
+@Table(name = "channels")
 public class Channel {
     @Id
     @Column(name = "ID")
